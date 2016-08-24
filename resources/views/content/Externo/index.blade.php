@@ -5,22 +5,22 @@
     <div class="meio">
         <div class="row">
             <div class="col-sm-4 col-md-4 col-lg-2 nav-stacked">
-            {{--@foreach($categorias as $categoria)
+            @foreach($categorias as $categoria)
                 <ul class="nav nav-pills nav-stacked">
                     <li><a href="javascrip: void(0);">{!! $categoria->nomeCategoria !!} </a></li>
                 </ul>
-            @endforeach--}}
+            @endforeach
             </div>
 
             <div class="col-sm-8 col-md-8 col-lg-7">
-            {{--@foreach($produtos as $produto)
+            @foreach($produtos as $produto)
                 <div class="col-sm-4 col-md-4 col-lg-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">{!! $produto->nomeProduto !!} </div>
                         <div class="panel-body"><img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
                         <div class="panel-footer">
                             <span style="float: left;"> R$ {{ $produto->precoProduto }} </span>
-                        {!! Form::open(array('url' => route('carrinho.update', $produto->id), 'method' => 'POST', 'id' => 'formLogin', 'class' => 'form')) !!}
+                        {!! Form::open(array('url' => route('carrinho.update', $produto->id), 'method' => 'POST', 'id' => 'formCarrinho', 'class' => 'form')) !!}
 
                             {!! Form::hidden('_method', 'PUT') !!}
                             {!! Form::hidden('qtd', '1') !!}
@@ -33,7 +33,7 @@
             @endforeach
                 <div class="text-center">
                     {!! $produtos->render() !!}
-                </div>--}}
+                </div>
             </div>
             <div class="col-sm-4 col-md-4 col-lg-3">
                 {!! Form::open(array('url' => route('store'), 'method' => 'POST', 'id' => 'formLogin', 'class' => 'form')) !!}

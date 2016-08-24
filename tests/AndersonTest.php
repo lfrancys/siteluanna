@@ -26,6 +26,33 @@ class AndersonTest extends TestCase
     }
 
     /**
+     * Testa se a dashboard do usuário realmente está protegida
+     */
+    public function testDashboardProtegida()
+    {
+        $this->flushSession();
+        $this->visit('/dashboard')->seePageIs('/');
+    }
+
+
+    /**
+     * Testa se a página inicial está de acordo com o que foi solicitado no enunciado (apenas produtos em destaque dos mais novos pros mais antigos)
+     */
+    public function testPaginaPrincipal()
+    {
+        $this->flushSession();
+        $produtos = factory(\App\Entities\Produto::class, 9)->create(['destaqueProduto' => 1]);
+        $outrosProdutos = factory(\App\Entities\Produto::class, 10)->create(['destaqueProduto' => 0]);
+        $this->visit('/');
+        foreach($produtos as $produto){
+            $this->see($produto->nomeProduto);
+        }
+        foreach($outrosProdutos as $oproduto){
+            $this->dontSee($oproduto->nomeProduto);
+        }
+    }
+
+    /**
      * Testa se o formulário de login está funcionando corretamente tanto pro usuário ativo quanto pro inativo.
      */
     public function testLogando()
@@ -46,34 +73,6 @@ class AndersonTest extends TestCase
             ->press($this->botaoEntrar)
             ->seePageIs('/dashboard');
     }
-
-    /**
-     * Testa se a dashboard do usuário realmente está protegida
-     */
-    public function testDashboardProtegida()
-    {
-        $this->flushSession();
-        $this->visit('/dashboard')->seePageIs('/');
-    }
-
-
-    /**
-     * Testa se a página inicial está de acordo com o que foi solicitado no enunciado (apenas produtos em destaque dos mais novos pros mais antigos)
-     */
-   /* public function testPaginaPrincipal()
-    {
-        $this->flushSession();
-        $produtos = factory(\App\Entities\Produto::class, 9)->create(['destaqueProduto' => 1]);
-        $outrosProdutos = factory(\App\Entities\Produto::class, 10)->create(['destaqueProduto' => 0]);
-        $this->visit('/');
-        foreach($produtos as $produto){
-            $this->see($produto->nomeProduto);
-        }
-        foreach($outrosProdutos as $oproduto){
-            $this->dontSee($oproduto->nomeProduto);
-        }
-    }*/
-
 
    /* public function testAdicionandoCarrinho()
     {

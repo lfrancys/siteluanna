@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Externo;
 
-/*use estudo\Services\CategoriaService;
-use estudo\Services\ProdutoService;*/
+use App\Services\CategoriaService;
+use App\Services\ProdutoService;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
-   /* protected $produtoService;
+    protected $produtoService;
     protected $categoriaService;
 
     function __construct(ProdutoService $produtoService, CategoriaService $categoriaService)
     {
         $this->produtoService = $produtoService;
         $this->categoriaService = $categoriaService;
-    }*/
+    }
 
 
     /**
@@ -33,10 +33,10 @@ class IndexController extends Controller
             return redirect()->route('dashboard');
 
 
-        /*$produtosDestaque = $this->produtoService->listaProdutosDestaque();
-        $categorias = $this->categoriaService->all();*/
+        $produtosDestaque = $this->produtoService->listaProdutosDestaque();
+        $categorias = $this->categoriaService->all();
 
-        return view('content.Externo.index');//->with(['produtos' => $produtosDestaque, 'categorias' => $categorias]);
+        return view('content.Externo.index')->with(['produtos' => $produtosDestaque, 'categorias' => $categorias]);
     }
 
     /**

@@ -20,3 +20,19 @@ $factory->define(\App\Entities\Pessoa::class, function (Faker\Generator $faker) 
         'statusPessoa' => $faker->boolean()
     ];
 });
+
+
+
+$factory->define(\App\Entities\Produto::class, function (Faker\Generator $faker) {
+
+    $categorias = \App\Entities\Categoria::all();
+
+    return [
+        'idCategoria' => $categorias[random_int(0, (count($categorias)-1))]->id,
+        'nomeProduto' => $faker->name,
+        'fotoProduto' => $faker->name.'.'.$faker->fileExtension,
+        'precoProduto' => $faker->randomFloat(2,0,100),
+        'estoqueProduto' => $faker->boolean(),
+        'destaqueProduto' => $faker->boolean()
+    ];
+});
